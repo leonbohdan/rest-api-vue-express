@@ -1,0 +1,32 @@
+{
+  "name": "rest-api-vue-express",
+  "version": "1.0.0",
+  "description": "rest api vue express node",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "node server/app.js",
+    "dev": "nodemon server/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leonbohdan/rest-api-vue-express.git"
+  },
+  "keywords": [
+    "rest",
+    "api",
+    "express",
+    "node"
+  ],
+  "author": "Bohdan Leonets",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leonbohdan/rest-api-vue-express/issues"
+  },
+  "homepage": "https://github.com/leonbohdan/rest-api-vue-express#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
