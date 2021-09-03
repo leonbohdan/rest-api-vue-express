@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <title>Todo List</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        .red {
+            color: red
+        }
+        .green {
+            color: green
+        }
+    </style>
 </head>
 <body>
     <div class="container pt-3" id="app">
@@ -39,26 +50,46 @@
                 ></textarea>
             </div>
 
-            <button class="btn btn-primary" type="submit">Создать</button>
+            <button class="btn btn-primary" type="submit" :disabled="!canCreate">Create</button>
             <hr>
         </form>
 
         <h1>Todo List</h1>
         <hr>
             
-        <div v-for="todo in todos" class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Todo for: {{todo.firstName}} {{todo.lastName}}</h5>
+        <div v-if="todos.length" v-cloak>
+            <div v-for="todo in todos" class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Todo for: {{todo.firstName}} {{todo.lastName}}</h5>
 
-                <p class="card-text"><b>Email:</b> {{todo.email}}</p>
+                    <p class="card-text">
+                        <b v-if="!todo.marked" class="red">In Process..</b>
+                        <b v-else class="green">Done</b>
+                    </p>
 
-                <p class="card-text">{{todo.todo}}</p>
+                    <p class="card-text"><b>Email:</b> {{todo.email}}</p>
 
-                <button class="btn btn-primary">Отметить</button>
+                    <p class="card-text">{{todo.todo}}</p>
 
-                <button class="btn btn-danger">Удалить</button>
+                    <button 
+                        class="btn btn-primary"
+                        @click="markTodo(todo.id)"
+                        :disabled="todo.marked"
+                    >
+                        Mark
+                    </button>
+
+                    <button 
+                        class="btn btn-danger"
+                        @click="deleteTodo(todo.id)"
+                    >
+                        Delete
+                    </button>
+                </div>
             </div>
         </div>
+
+        <div v-else>Todos list is empty</div>
     </div>
 
     <script type="module" src="vue.js"></script>
