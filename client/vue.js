@@ -9,13 +9,15 @@ new Vue({
                 lastName: '',
                 email: '',
                 todo: ''
-            }
+            },
+            todos: []
         }
     },
     methods: {
         createTodo() {
             const {...todo} = this.form;
-            console.log(todo);
+
+            this.todos.push({...todo, id: Date.now()});
 
             this.form.firstName = this.form.lastName = this.form.email = this.form.todo = '';
         }

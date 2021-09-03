@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container pt-3" id="app">
-        <h1>Todo List</h1>
+        <h1>Add Todo</h1>
 
         <form class="form-inline mb-3" @submit.prevent="createTodo">
             <div class="input-group mb-3">
@@ -42,12 +42,17 @@
             <button class="btn btn-primary" type="submit">Создать</button>
             <hr>
         </form>
-            
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">card-title</h5>
 
-                <p class="card-text">card-text</p>
+        <h1>Todo List</h1>
+        <hr>
+            
+        <div v-for="todo in todos" class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Todo for: {{todo.firstName}} {{todo.lastName}}</h5>
+
+                <p class="card-text"><b>Email:</b> {{todo.email}}</p>
+
+                <p class="card-text">{{todo.todo}}</p>
 
                 <button class="btn btn-primary">Отметить</button>
 
