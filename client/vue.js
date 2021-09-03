@@ -47,7 +47,8 @@ new Vue({
             const todo = this.todos.find(td => td.id === id);
             todo.marked = true;
         },
-        deleteTodo(id) {
+        async deleteTodo(id) {
+            await request(`api/todos/${id}`, 'DELETE');
             this.todos = this.todos.filter(td => td.id !== id);
         }
     },

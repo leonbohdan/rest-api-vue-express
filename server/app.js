@@ -4,7 +4,7 @@ const { v4 } = require('uuid');
 const app = express();
 
 //  database
-const TODOS = [
+let TODOS = [
     {id: v4(), marked: false, firstName: 'Oleg', lastName: 'Fromm', email: 'olegFrom@gmail.com', todo: 'Make your homework!'}
 ];
 
@@ -20,6 +20,12 @@ app.post('/api/todos', (req, res) => {
     const todo = {...req.body, id: v4(), marked: false};
     TODOS.push(todo);
     res.status(201).json(todo);
+});
+
+//  DELETE
+app.delete('/api/todos/:id', (req, res) => {
+    TODOS = TODOS.filter(td => td.id !== req.params.id);
+    res.status(200).json({message: 'Todo was deleted!'});
 })
 
 app.use(express.static(path.resolve(__dirname, '../client')));
