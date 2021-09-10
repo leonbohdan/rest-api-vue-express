@@ -26,7 +26,14 @@ app.post('/api/todos', (req, res) => {
 app.delete('/api/todos/:id', (req, res) => {
     TODOS = TODOS.filter(td => td.id !== req.params.id);
     res.status(200).json({message: 'Todo was deleted!'});
-})
+});
+
+//  PUT
+app.put('/api/todos/:id', (req, res) => {
+    const idx = TODOS.findIndex(td => td.id === req.params.id);
+    TODOS[idx] = req.body;
+    res.status(200).json(TODOS[idx]);
+});
 
 app.use(express.static(path.resolve(__dirname, '../client')));
 

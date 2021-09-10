@@ -1,4 +1,3 @@
-// import { json } from 'express';
 import Vue from 'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.esm.browser.js';
 
 Vue.component('loader', {
@@ -43,9 +42,13 @@ new Vue({
 
             this.form.firstName = this.form.lastName = this.form.email = this.form.todo = '';
         },
-        markTodo(id) {
+        async markTodo(id) {
             const todo = this.todos.find(td => td.id === id);
-            todo.marked = true;
+            const updatedTodo = await request(`api/todos/${id}`, 'PUT', {
+                ...todo,
+                marked: true
+            });
+            todo.marked = updatedTodo.marked;
         },
         async deleteTodo(id) {
             await request(`api/todos/${id}`, 'DELETE');
